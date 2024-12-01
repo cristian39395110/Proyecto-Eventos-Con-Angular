@@ -41,14 +41,26 @@ const createUsuarioPassword = async (req, res) => {
 
 // Obtener todos los usuarios
 const getAllUsuarios = async (req, res) => {
+    console.log(req.session.userRole);
     try {
-        const allUsuarios = await usuarios.findAll();
-        res.json(allUsuarios);
+      // Verificar si la sesión está activa y contiene el rol
+      if (!req.session || !req.session.userRole) {
+        return res.status(401).json({ message: "No estás autenticado" });
+      }
+  
+      // Validar si el usuario tiene rol de organizador
+      if (req.session.userRole !== "organizador") {
+        return res.status(403).json({ message: "Acceso denegado. No tienes permisos suficientes." });
+      }
+  
+      // Obtener todos los usuarios si tiene permiso
+      const allUsuarios = await usuarios.findAll();
+      res.json(allUsuarios);
     } catch (err) {
-        res.status(500).json({ error: err.message });
+      res.status(500).json({ error: err.message });
     }
-};
-
+  };
+  
 // Obtener un usuario por ID
 const getUsuarioById = async (req, res) => {
     try {

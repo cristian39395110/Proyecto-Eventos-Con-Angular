@@ -30,6 +30,10 @@ module.exports = function(sequelize, DataTypes) {
         model: 'usuarios',
         key: 'idUsuario'
       }
+    },
+    imagen: {
+      type: DataTypes.STRING, // Guardaremos la ruta de la imagen como texto
+      allowNull: true,        // Puede ser nulo si no se sube una imagen
     }
   }, {
     sequelize,
@@ -50,7 +54,7 @@ module.exports = function(sequelize, DataTypes) {
         fields: [
           { name: "idOrganizador" },
         ]
-      },
+      }
     ]
   });
 };

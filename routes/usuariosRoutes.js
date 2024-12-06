@@ -47,7 +47,8 @@ router.post(
 );
 
 // Rutas CRUD para usuarios
-router.get("/getAllUsuarios",isOrganizer, getAllUsuarios); // Obtener todos los usuarios
+//router.get("/getAllUsuarios", getAllUsuarios); // Obtener todos los usuarios
+router.get("/getAllUsuarios" ,isOrganizer , getAllUsuarios); 
 router.get("/:id", getUsuarioById); // Obtener un usuario por ID
 router.put("/:id", updateUsuario); // Actualizar un usuario
 router.delete("/:id", deleteUsuario); // Eliminar un usuario
